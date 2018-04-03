@@ -1,12 +1,12 @@
 
 sealed trait Fruit {
-  def price: Double
+  def price: BigDecimal
 }
 
 case object Apple extends Fruit {
-  def price: Double = 0.6
+  def price: BigDecimal = 0.6
 }
 
 case object Orange extends Fruit {
-  def price: Double = 0.25
+  def price: BigDecimal = 0.25
 }

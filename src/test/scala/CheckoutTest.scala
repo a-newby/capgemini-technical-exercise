@@ -29,9 +29,9 @@ final class CheckoutTest extends FlatSpec with PropertyChecks {
 
   it should "return the sum of the apple prices and orange prices for an arbitrary list" in {
     forAll(Gen.listOf(Gen.oneOf(Apple, Orange))) { fruitList =>
-      val expectedOutput = (0.6 * fruitList.count(_ == Apple)) + (0.25 * fruitList.count(_ == Orange))
-      val testOutput = Checkout.checkout(fruitList)
-      println(testOutput)
+      val expectedOutput =
+        (0.6 * BigDecimal(fruitList.count(_ == Apple))) + (0.25 * BigDecimal(fruitList.count(_ == Orange)))
+      val testOutput= Checkout.checkout(fruitList)
       assert(testOutput == expectedOutput)
     }
   }
