@@ -27,17 +27,12 @@ final class CheckoutTest extends FlatSpec with PropertyChecks {
     assert(testOutput == expectedOutput)
   }
 
-  /*
-    NOTE: writing these tests led naturally to property testing, though in the real world one
-    argue that this function isn't complex enough to warrant its own module at all, the test did
-    helpfully reveal some problems with rounding errors that my original solution had, prompting
-    a switch from Double to BigDecimal!
-   */
-  it should "return the sum of the apple prices and orange prices for an arbitrary list" in {
-    forAll(Gen.listOf(Gen.oneOf(Apple, Orange))) { fruitList =>
-      val expectedOutput =
-        (0.6 * BigDecimal(fruitList.count(_ == Apple))) + (0.25 * BigDecimal(fruitList.count(_ == Orange)))
-      val testOutput= Checkout.checkout(fruitList)
+  /* NOTE: There was a simpler property test here, but it was invalidated by the buy-one-get-one-free deal*/
+
+  it should "only charge for half the Apples, rounded up, due to buy-one-get-one-free" in {
+    forAll(Gen.listOf(Apple)) { appleList =>
+      val expectedOutput = 0.6 * BigDecimal(appleList.length / 2 + appleList.length % 2)
+      val testOutput= Checkout.checkout(appleList)
       assert(testOutput == expectedOutput)
     }
   }
