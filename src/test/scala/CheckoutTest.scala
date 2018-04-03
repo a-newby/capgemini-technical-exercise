@@ -36,4 +36,12 @@ final class CheckoutTest extends FlatSpec with PropertyChecks {
       assert(testOutput == expectedOutput)
     }
   }
+
+  it should "only charge two thirds of the Oranges, rounded up, due to three-for-the-price-of-two" in {
+    forAll(Gen.listOf(Orange)) { orangeList =>
+      val expectedOutput = BigDecimal(0.25) * ((orangeList.length / 3) * 2 + (orangeList.length % 3))
+      val testOutput= Checkout.checkout(orangeList)
+      assert(testOutput == expectedOutput)
+    }
+  }
 }
