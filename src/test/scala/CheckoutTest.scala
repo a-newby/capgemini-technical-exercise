@@ -18,4 +18,10 @@ final class CheckoutTest extends FlatSpec {
     val testOutput = Checkout.checkout(List[Fruit](Orange))
     assert(testOutput == expectedOutput)
   }
+
+  it should "return 0.85 for a list with an Apple and an Orange" in {
+    val expectedOutput = 0.85
+    val testOutput = Checkout.checkout(List[Fruit](Apple, Orange))
+    assert(testOutput == expectedOutput)
+  }
 }
