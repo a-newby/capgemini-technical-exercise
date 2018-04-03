@@ -31,7 +31,7 @@ final class CheckoutTest extends FlatSpec with PropertyChecks {
 
   it should "only charge for half the Apples, rounded up, due to buy-one-get-one-free" in {
     forAll(Gen.listOf(Apple)) { appleList =>
-      val expectedOutput = 0.6 * BigDecimal(appleList.length / 2 + appleList.length % 2)
+      val expectedOutput = BigDecimal(0.6) * (appleList.length / 2 + appleList.length % 2)
       val testOutput= Checkout.checkout(appleList)
       assert(testOutput == expectedOutput)
     }
