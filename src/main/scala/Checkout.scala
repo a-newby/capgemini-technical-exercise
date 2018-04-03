@@ -1,4 +1,4 @@
 
 object Checkout {
-  def checkout(items: List[Fruit]): Int = ??? //Unimplemented - awaiting TDD
+  def checkout(items: List[Fruit]): Double = ??? //Unimplemented - awaiting TDD
 }
