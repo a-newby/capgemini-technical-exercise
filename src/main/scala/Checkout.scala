@@ -1,4 +1,4 @@
 
 object Checkout {
-  def checkout(items: List[Fruit]): Double = items.headOption.map(_.price).getOrElse(0.0)
+  def checkout(items: List[Fruit]): Double = items.map(_.price).sum
 }
