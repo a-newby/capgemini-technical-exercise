@@ -27,6 +27,12 @@ final class CheckoutTest extends FlatSpec with PropertyChecks {
     assert(testOutput == expectedOutput)
   }
 
+  /*
+    NOTE: writing these tests led naturally to property testing, though in the real world one
+    argue that this function isn't complex enough to warrant its own module at all, the test did
+    helpfully reveal some problems with rounding errors that my original solution had, prompting
+    a switch from Double to BigDecimal!
+   */
   it should "return the sum of the apple prices and orange prices for an arbitrary list" in {
     forAll(Gen.listOf(Gen.oneOf(Apple, Orange))) { fruitList =>
       val expectedOutput =
